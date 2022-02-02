@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-3">
+                Wordle Result - Slack Emoji Swapper
+            </h1>
+
+
+            <div class="field">
+                <label class="label">Substitutions</label>
+            </div>
+            <div class="field">
+                <label class="label">⬛/⬜/:black_large_square:/:white_large_square:</label>
+                <div class="control">
+                    <input id="miss" class="input" type="text" placeholder="Slack Emoji Code">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">🟨/🟦/:large_yellow_square:/:large_blue_square:</label>
+                <div class="control">
+                    <input id="present" class="input" type="text" placeholder="Slack Emoji Code">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">🟩/🟧/:large_green_square:/:large_orange_square:</label>
+                <div class="control">
+                    <input id="correct" class="input" type="text" placeholder="Slack Emoji Code">
+                </div>
+            </div>
+
+
+            <div class="field">
+                <label class="label">Paste your Wordle result</label>
+                <div class="control">
+                    <textarea id="wordleResult" class="textarea" placeholder="Paste your wordle result"></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button id="substitute" class="button is-link">Substitute</button>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Output</label>
+                <div class="control">
+                    <textarea id="output" class="textarea" placeholder="Paste your wordle result"></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        function substitute() {
+            const wordleResult = document.getElementById("wordleResult");
+            const miss = document.getElementById("miss").value;
+            const present = document.getElementById("present").value;
+            const correct = document.getElementById("correct").value;
+
+            if (!!wordleResult) {// && !!miss && !!present && !!correct) {
+                document.getElementById("output").value = wordleResult.value
+                    .replace(/⬛|⬜|:black_large_square:|:white_large_square:/gi,miss)
+                    .replace(/🟨|🟦|:large_yellow_square:|:large_blue_square:/gi,present)
+                    .replace(/🟩|🟧|:large_green_square:|:large_orange_square:/gi,correct);
+
+            }
+        }
+
+        const substituteButton = document.getElementById("substitute");
+        substituteButton.addEventListener('click', substitute);
+
+    </script>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                Something broken? <a href="https://jameshill.io">Let me know.</a> This is just a quick hack though! ¯\_(ツ)_/¯
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
